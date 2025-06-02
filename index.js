@@ -32,7 +32,7 @@ client.once('ready', () => {
 client.on('messageCreate', async message => {
     console.log(`[Recibido] ${message.author.tag}: ${message.content}`);
     
-    if (message.author.bot || message.channel.name !== TARGET_CHANNEL_ID) 
+    if (message.author.bot || message.channel.id !== TARGET_CHANNEL_ID) 
     console.log("Canal, diferente a target channel");
     return;
 
