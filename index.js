@@ -15,6 +15,7 @@ const MAX_QUESTIONS_PER_HOUR = 3;
 
 client.once('ready', () => {
     console.log(`🤖 EazyBot AI está en línea como ${client.user.tag}`);
+    console.log(`Canal objetivo: ${process.env.TARGET_CHANNEL}`);
 });
 
 client.on('messageCreate', async message => {
