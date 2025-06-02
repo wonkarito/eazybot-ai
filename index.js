@@ -1,9 +1,9 @@
-//require('dotenv').config();
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const express = require('express');
 const fetch = require('node-fetch');
 const rateLimit = require('./utils/rateLimit');
 const generateReply = require('./utils/generateReply');
+console.log("✅ Módulo generateReply.js cargado correctamente");
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
