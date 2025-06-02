@@ -29,7 +29,11 @@ client.once('ready', () => {
 client.on('messageCreate', async message => {
     console.log(`[Recibido] ${message.author.tag}: ${message.content}`);
 
-    if (message.author.bot || message.channel.id.toString() !== TARGET_CHANNEL_ID.toString()) {
+    if (
+          message.author.bot ||
+          message.author.id === client.user.id || // 🧼 Evita responderse a sí mismo
+          message.channel.id.toString() !== TARGET_CHANNEL_ID.toString()
+        ) {
         console.log("Canal diferente a target channel");
         return;
     }
