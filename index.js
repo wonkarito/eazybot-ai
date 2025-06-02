@@ -42,6 +42,7 @@ client.on('messageCreate', async message => {
     }
 
     const reply = await generateReply(userMessage);
+    console.log("📝 Respondiendo al usuario:", userId);
     message.reply(reply);
 });
 
