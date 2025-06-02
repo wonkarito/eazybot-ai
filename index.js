@@ -16,6 +16,17 @@ const MAX_QUESTIONS_PER_HOUR = 3;
 client.once('ready', () => {
     console.log(`🤖 EazyBot AI está en línea como ${client.user.tag}`);
     console.log(`Canal objetivo: ${process.env.TARGET_CHANNEL}`);
+    
+    // Enviar mensaje automático cuando arranque
+    const guilds = client.guilds.cache;
+    for (const [guildId, guild] of guilds) {
+        const channel = guild.channels.cache.find(c =>
+            c.name === process.env.TARGET_CHANNEL && c.isTextBased()
+        );
+        if (channel) {
+            channel.send("🧠 EazyBot AI está activo y listo para ayudarte. Escribe tu pregunta aquí. 🤖");
+        }
+    }
 });
 
 client.on('messageCreate', async message => {
