@@ -6,7 +6,7 @@ module.exports = {
         if (!userAccessLog[userId]) {
             userAccessLog[userId] = [];
         }
-        // Filtrar accesos de la última hora
+        // Mantener solo accesos en la última hora
         userAccessLog[userId] = userAccessLog[userId].filter(ts => now - ts < 3600000);
         if (userAccessLog[userId].length >= 3) {
             return false;
