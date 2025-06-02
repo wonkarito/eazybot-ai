@@ -28,13 +28,14 @@ client.once('ready', () => {
 
 client.on('messageCreate', async message => {
     console.log(`[Recibido] ${message.author.tag}: ${message.content}`);
-
+    console.log("Mensaje recibido de:", message.author.tag, "-", message.author.id);
+    console.log("¿Soy yo?", message.author.id === client.user.id);
     if (
-          message.author.bot ||
-          message.author.id === client.user.id || // 🧼 Evita responderse a sí mismo
-          message.channel.id.toString() !== TARGET_CHANNEL_ID.toString()
-        ) {
-        console.log("Canal diferente a target channel");
+        message.author.id === client.user.id ||  // ignora mensajes del propio bot
+        message.author.bot ||                    // ignora otros bots
+        message.channel.id.toString() !== TARGET_CHANNEL_ID.toString()
+    ) {
+        console.log("Canal diferente o autor es el bot");
         return;
     }
 
