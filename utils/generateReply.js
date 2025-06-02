@@ -3,6 +3,8 @@ const fetch = require('node-fetch');
 module.exports = async function(userMessage) {
     const prompt = `Eres EazyBot AI, asistente oficial de Eazy RP. Solo puedes responder con base en https://docs.eazyrp.net/normativas. Si no puedes responder, di que abran un ticket.`;
 
+    console.log("🧠 Enviando pregunta a OpenAI:", userMessage);
+
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -22,10 +24,12 @@ module.exports = async function(userMessage) {
 
         const data = await response.json();
 
+        console.log("📦 Respuesta cruda de OpenAI:", JSON.stringify(data, null, 2));
+
         return (data.choices?.[0]?.message?.content || "No tengo una respuesta clara. Abre un ticket. 🤖") + " 🤖";
 
     } catch (err) {
-        console.error("Error generando respuesta:", err);
+        console.error("❌ Error generando respuesta:", err);
         return "Hubo un error generando la respuesta. Intenta más tarde o abre un ticket. 🤖";
     }
 };
