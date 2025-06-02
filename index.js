@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const express = require('express');
 const fetch = require('node-fetch');
