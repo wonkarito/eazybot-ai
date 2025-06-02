@@ -2,7 +2,7 @@ const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const express = require('express');
 const fetch = require('node-fetch');
 const rateLimit = require('./utils/rateLimit');
-const generateReply = require('./utils/generateReply');
+const generateReply = require('./utils/generateReply-openai');
 console.log("✅ Módulo generateReply.js cargado correctamente");
 
 const client = new Client({
