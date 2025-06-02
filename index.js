@@ -10,7 +10,7 @@ const client = new Client({
     partials: [Partials.Channel]
 });
 
-const TARGET_CHANNEL_ID_ID = process.env.TARGET_CHANNEL_ID || "1379171544605134919";
+const TARGET_CHANNEL_ID = process.env.TARGET_CHANNEL_ID || "1379171544605134919";
 const MAX_QUESTIONS_PER_HOUR = 3;
 
 client.once('ready', () => {
