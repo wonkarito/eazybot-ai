@@ -19,7 +19,10 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', async message => {
+    console.log(`[Recibido] ${message.author.tag}: ${message.content}`);
+    
     if (message.author.bot || message.channel.name !== TARGET_CHANNEL) return;
+
     const userId = message.author.id;
     const userMessage = message.content;
 
