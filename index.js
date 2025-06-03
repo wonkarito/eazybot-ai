@@ -27,13 +27,15 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', async message => {
-    console.log(`[Recibido] ${message.author.tag}: ${message.content}`);
-    console.log("Mensaje recibido de:", message.author.tag, "-", message.author.id);
+    console.log(`Mensaje recibido de: ${message.author.tag} - ${message.author.id}`);
     console.log("¿Soy yo?", message.author.id === client.user.id);
+
+    // 🧼 Ignorar mensajes del bot, hilos, embeds y otros canales inesperados
     if (
-        message.author.id === client.user.id ||  // ignora mensajes del propio bot
-        message.author.bot ||                    // ignora otros bots
-        message.channel.id.toString() !== TARGET_CHANNEL_ID.toString()
+        message.author.id === client.user.id ||
+        message.author.bot ||
+        message.channel.id.toString() !== TARGET_CHANNEL_ID.toString() ||
+        message.type !== 0 // solo mensajes "default", no respuestas embebidas o edits
     ) {
         console.log("Canal diferente o autor es el bot");
         return;
@@ -50,6 +52,7 @@ client.on('messageCreate', async message => {
     console.log("📝 Respondiendo al usuario:", userId);
     message.reply(reply);
 });
+
 
 client.login(process.env.DISCORD_TOKEN);
 
