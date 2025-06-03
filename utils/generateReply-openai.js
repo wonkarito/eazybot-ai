@@ -3,14 +3,26 @@ const fetch = require('node-fetch');
 module.exports = async function(userMessage) {
     console.log("🧠 Enviando pregunta a OpenAI:", userMessage);
 
-    const keywords = [
+    const lowerQuestion = userMessage.toLowerCase();
+
+    const factionKeywords = [
         "banda", "facción", "organización", "cartel", "criminal", "mafia",
         "grupo", "ems", "lspd", "bahama", "mecánicos", "taller", "club",
         "hospital", "policía", "doctor", "gobierno", "lider", "unirme", "trabajo"
     ];
 
-    const lowerQuestion = userMessage.toLowerCase();
-    const hasFactionKeyword = keywords.some(kw => lowerQuestion.includes(kw));
+    const hasFactionKeyword = factionKeywords.some(kw => lowerQuestion.includes(kw));
+    const isEazyCoinsQuestion = lowerQuestion.includes("eazy coins") || lowerQuestion.includes("eazycoins") || lowerQuestion.includes("comprar con eazy");
+    const isEazyPassQuestion = lowerQuestion.includes("eazy pass") || lowerQuestion.includes("pase de temporada");
+
+    // Respuestas automáticas para temas específicos
+    if (isEazyCoinsQuestion) {
+        return "💰 Puedes usar tus EazyCoins para comprar autos VIP, aeronaves, barcos, islas privadas y más artículos exclusivos que iremos añadiendo. 🤖";
+    }
+
+    if (isEazyPassQuestion) {
+        return "🎁 El Eazy Pass es un pase de temporada gratuito que te permite obtener ítems y artículos exclusivos con puntos de recompensa. Estos puntos los consigues por horas de juego. 🤖";
+    }
 
     const systemPrompt = hasFactionKeyword
         ? "Eres EazyBot AI, el asistente del servidor Eazy RP. Puedes responder preguntas sobre las facciones legales e ilegales del servidor, incluyendo roles, jerarquías, requisitos para unirse, responsabilidades, nombres de líderes si están disponibles públicamente y cómo interactúan con el rol. Si no sabes la respuesta exacta, sugiere abrir un ticket para más información."
