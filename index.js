@@ -25,7 +25,7 @@ client.once('ready', () => {
         }
     }
 });
-
+client.removeAllListeners('messageCreate');
 client.on('messageCreate', async message => {
     console.log(`Mensaje recibido de: ${message.author.tag} - ${message.author.id}`);
     console.log("¿Soy yo?", message.author.id === client.user.id);
@@ -37,7 +37,6 @@ client.on('messageCreate', async message => {
         message.channel.id.toString() !== TARGET_CHANNEL_ID.toString() ||
         message.type !== 0 // solo mensajes "default", no respuestas embebidas o edits
     ) {
-        console.log("Canal diferente o autor es el bot");
         return;
     }
 
@@ -55,6 +54,8 @@ client.on('messageCreate', async message => {
 
 
 client.login(process.env.DISCORD_TOKEN);
+console.log("Total de listeners para messageCreate:", client.listenerCount('messageCreate'));
+
 
 // Express para mantener activo el servicio
 const app = express();
