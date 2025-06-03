@@ -36,9 +36,7 @@ client.on('messageCreate', async message => {
         message.author.bot ||
         message.channel.id.toString() !== TARGET_CHANNEL_ID.toString() ||
         message.type !== 0 // solo mensajes "default", no respuestas embebidas o edits
-    ) {
-        return;
-    }
+    ) return;
 
     const userId = message.author.id;
     const userMessage = message.content;
