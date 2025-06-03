@@ -3,7 +3,18 @@ const fetch = require('node-fetch');
 module.exports = async function(userMessage) {
     console.log("🧠 Enviando pregunta a OpenAI:", userMessage);
 
-    const systemPrompt = "Eres EazyBot AI, el asistente oficial del servidor de rol Eazy RP. Solo puedes responder con base en https://docs.eazyrp.net/normativas. Si no puedes ayudar, sugiere abrir un ticket.";
+    const keywords = [
+        "banda", "facción", "organización", "cartel", "criminal", "mafia",
+        "grupo", "ems", "lspd", "bahama", "mecánicos", "taller", "club",
+        "hospital", "policía", "doctor", "gobierno", "lider", "unirme", "trabajo"
+    ];
+
+    const lowerQuestion = userMessage.toLowerCase();
+    const hasFactionKeyword = keywords.some(kw => lowerQuestion.includes(kw));
+
+    const systemPrompt = hasFactionKeyword
+        ? "Eres EazyBot AI, el asistente del servidor Eazy RP. Puedes responder preguntas sobre las facciones legales e ilegales del servidor, incluyendo roles, jerarquías, requisitos para unirse, responsabilidades, nombres de líderes si están disponibles públicamente y cómo interactúan con el rol. Si no sabes la respuesta exacta, sugiere abrir un ticket para más información."
+        : "Eres EazyBot AI, el asistente oficial del servidor de rol Eazy RP. Solo puedes responder con base en https://docs.eazyrp.net/normativas. Si no puedes ayudar, sugiere abrir un ticket.";
 
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
